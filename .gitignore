@@ -68,7 +68,9 @@ hs_err_pid*
 *Contants.*
 
 .idea/modules/
-src/main/resources/
+
+#Not ignore resources to use in main example
+!src/main/resources/
 src/test/resources/
 
 src/test/java/Constants.java
