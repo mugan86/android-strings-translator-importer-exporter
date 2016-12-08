@@ -1,4 +1,5 @@
-package point;
+package imported;
+
 
 import javax.persistence.*;
 import java.util.*;
@@ -8,7 +9,7 @@ public class Main {
         // Open a database connection
         // (create a new database if it doesn't exist yet):
         EntityManagerFactory emf =
-            Persistence.createEntityManagerFactory("$objectdb/db/points.odb");
+            Persistence.createEntityManagerFactory("db/points.odb");
         EntityManager em = emf.createEntityManager();
 
         // Store 1000 Point objects in the database:
