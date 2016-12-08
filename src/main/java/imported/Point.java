@@ -1,4 +1,4 @@
-package point;
+package imported;
 
 import java.io.Serializable;
 import javax.persistence.*;
