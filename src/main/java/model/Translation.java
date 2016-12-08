@@ -1,15 +1,16 @@
-package models;
+package model;
 
-import javax.persistence.GeneratedValue;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
 
 /******************************************************
  * Created by anartzmugika on 8/12/16.
  *****************************************************/
+@Entity
 public class Translation implements Serializable {
 
-    @Id @GeneratedValue
+    @Id
     private String name;
 
     private String text_eu;
@@ -100,7 +101,7 @@ public class Translation implements Serializable {
         this.select_language = select_language;
     }
 
-    private void setTextInSelectLanguage(String text)
+    public void setTextInSelectLanguage(String text)
     {
         if (select_language.equals("eu")) this.setText_eu(text);
         if (select_language.equals("en")) this.setText_en(text);
@@ -109,5 +110,23 @@ public class Translation implements Serializable {
         if (select_language.equals("ga")) this.setText_ga(text);
         if (select_language.equals("pt")) this.setText_pt(text);
         if (select_language.equals("it")) this.setText_it(text);
+        System.out.println("Select language: " + this.select_language);
+    }
+    public String getCurrentSelectTextTranslation()
+    {
+        System.out.println("Select language (Translation): " + this.select_language);
+        if (select_language.equals("eu")) return getText_eu();
+        if (select_language.equals("en")) return getText_en();
+        if (select_language.equals("es")) return getText_es();
+        if (select_language.equals("ca")) return getText_ca();
+        if (select_language.equals("ga")) return getText_ga();
+        if (select_language.equals("pt")) return getText_pt();
+        return getText_it();
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.getName() + ": " + this.getText_eu()  + " / " + this.getText_es() + " / Select Language: " + this.getSelect_language();
     }
 }

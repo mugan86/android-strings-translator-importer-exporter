@@ -7,6 +7,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import db.DBManage;
+import values.ConstantValues;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,14 +19,14 @@ import java.util.ArrayList;
 /**
  * Created by anartzmugika on 7/12/16.
  */
-public class ImportXMLToSQL {
+public class ImportXMLToObjectDB {
     private ArrayList<Translation> translations;
     private DBManage info_manage;
     public static void main(String[] args) throws IOException {
 
-        String fileName = "es/strings.xml";
-        //new ImportXMLToSQL().readFileResources();
-        new ImportXMLToSQL().readFileResources(fileName);
+        String fileName = "en/strings.xml";
+        //new ImportXMLToObjectDB().readFileResources();
+        new ImportXMLToObjectDB().readFileResources(fileName);
 
     }
 
@@ -41,7 +42,7 @@ public class ImportXMLToSQL {
     {
         translations = new ArrayList<Translation>();
 
-        DBManage info_manage = new DBManage("db/translations.odb");
+        DBManage info_manage = new DBManage(ConstantValues.DEFAULT_DB_PATH);
         //info_manage.getRegisterCount();
         info_manage.setUselanguage(fileName);
 
@@ -80,7 +81,6 @@ public class ImportXMLToSQL {
         }
 
         info_manage.addTranslationsInSelectLanguage(translations);
-        info_manage.findTranslationObject("action_settings");
         info_manage.closeDataBase();
     }
 
