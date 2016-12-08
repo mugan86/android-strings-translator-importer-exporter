@@ -1,33 +1,34 @@
 package imported;
 
+import models.Translation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import utils.InfoManage;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Created by anartzmugika on 7/12/16.
  */
 public class ImportXMLToSQL {
-    String fileName = "strings.xml";
+    private ArrayList<Translation> translations;
+    private InfoManage info_manage;
     public static void main(String[] args) throws IOException {
+
+        String fileName = "es/strings.xml";
         //new ImportXMLToSQL().readFileResources();
-
-
-        new ImportXMLToSQL().readFileResources();
-
+        new ImportXMLToSQL().readFileResources(fileName);
     }
 
-    private File getFile()
+    private File getFile(String fileName)
     {
         // Getting ClassLoader obj
         ClassLoader classLoader = getClass().getClassLoader();
@@ -35,13 +36,20 @@ public class ImportXMLToSQL {
         return new File(classLoader.getResource(fileName).getFile());
     }
 
-    private void readFileResources()
+    private void readFileResources(String fileName)
     {
+        translations = new ArrayList<Translation>();
+
+        InfoManage info_manage = new InfoManage("db/translations.odb");
+        //info_manage.getRegisterCount();
+        info_manage.setUselanguage(fileName);
+
         DocumentBuilderFactory docFactory= DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder= null;
+        Translation otranslation;
         try {
             docBuilder = docFactory.newDocumentBuilder();
-            Document doc=docBuilder.parse(getFile());
+            Document doc=docBuilder.parse(getFile(fileName));
 
 
             NodeList strings= doc.getElementsByTagName("string");
@@ -49,13 +57,18 @@ public class ImportXMLToSQL {
             System.out.println("***************************************");
             for(int i = 0; i < strings.getLength(); i++)
             {
-                  Node nodeErosle= strings.item(i);
+                Node node_str_element= strings.item(i);
                 //Erosle bakoitzaren informazioa eman ahal izateko luzeraren arabera
-                Element erosleElementua = (Element)nodeErosle;
+                Element str_element = (Element)node_str_element;
+                String name = str_element.getAttribute("name");
+                String text = str_element.getTextContent();
                 //Elementuaren id atributua hartu eta bistaratuko du
-                System.out.println("name: "+erosleElementua.getAttribute("name"));
-                System.out.println("Text"+ erosleElementua.getTextContent());
+                System.out.println("name: "+ name);
+                System.out.println("Text: "+ text);
                 System.out.println("***************************************");
+
+
+                translations.add(new Translation(name, text, info_manage.getSelect_language()));
             }
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -64,6 +77,9 @@ public class ImportXMLToSQL {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        info_manage.addTranslationsInSelectLanguage(translations);
+        info_manage.closeDataBase();
     }
 
 }
