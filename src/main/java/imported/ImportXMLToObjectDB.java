@@ -1,12 +1,12 @@
 package imported;
 
-import models.Translation;
+import model.Translation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import utils.InfoManage;
+import db.DBManage;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,12 +20,13 @@ import java.util.ArrayList;
  */
 public class ImportXMLToSQL {
     private ArrayList<Translation> translations;
-    private InfoManage info_manage;
+    private DBManage info_manage;
     public static void main(String[] args) throws IOException {
 
         String fileName = "es/strings.xml";
         //new ImportXMLToSQL().readFileResources();
         new ImportXMLToSQL().readFileResources(fileName);
+
     }
 
     private File getFile(String fileName)
@@ -40,7 +41,7 @@ public class ImportXMLToSQL {
     {
         translations = new ArrayList<Translation>();
 
-        InfoManage info_manage = new InfoManage("db/translations.odb");
+        DBManage info_manage = new DBManage("db/translations.odb");
         //info_manage.getRegisterCount();
         info_manage.setUselanguage(fileName);
 
@@ -79,6 +80,7 @@ public class ImportXMLToSQL {
         }
 
         info_manage.addTranslationsInSelectLanguage(translations);
+        info_manage.findTranslationObject("action_settings");
         info_manage.closeDataBase();
     }
 
