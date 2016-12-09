@@ -34,9 +34,8 @@ public class ImportXMLToObjectDB {
     {
         // Getting ClassLoader obj
         ClassLoader classLoader = getClass().getClassLoader();
-
         // Getting resource(File) from class loader
-        return new File(classLoader.getResource(fileName).getPath());
+        return new File(classLoader.getResource(fileName).getFile());
     }
 
     private void readFileResources(String fileName)
