@@ -153,6 +153,8 @@ new WriteXMLFilesFromObjectDB().Test();
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
+
+            //TODO add correct path
             StreamResult result = new StreamResult(new File("/my/file.xml"));
 
             // Output to console for testing
