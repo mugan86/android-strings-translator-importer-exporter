@@ -16,9 +16,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
+/***********************************************************************************************************************
  * Created by anartzmugika on 7/12/16.
- */
+ **********************************************************************************************************************/
 public class ImportXMLToObjectDB {
     private ArrayList<Translation> translations;
     private DBManage info_manage;
@@ -34,8 +34,9 @@ public class ImportXMLToObjectDB {
     {
         // Getting ClassLoader obj
         ClassLoader classLoader = getClass().getClassLoader();
+
         // Getting resource(File) from class loader
-        return new File(classLoader.getResource(fileName).getFile());
+        return new File(classLoader.getResource(fileName).getPath());
     }
 
     private void readFileResources(String fileName)
@@ -46,9 +47,8 @@ public class ImportXMLToObjectDB {
         //info_manage.getRegisterCount();
         info_manage.setUselanguage(fileName);
 
-        DocumentBuilderFactory docFactory= DocumentBuilderFactory.newInstance();
+        /*DocumentBuilderFactory docFactory= DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder= null;
-        Translation otranslation;
         try {
             docBuilder = docFactory.newDocumentBuilder();
             Document doc=docBuilder.parse(getFile(fileName));
@@ -78,9 +78,10 @@ public class ImportXMLToObjectDB {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        info_manage.addTranslationsInSelectLanguage(translations);
+        //info_manage.addTranslationsInSelectLanguage(translations);
+        info_manage.showAllTranslationsRegisters();
         info_manage.closeDataBase();
     }
 
