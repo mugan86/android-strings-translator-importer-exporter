@@ -90,7 +90,7 @@ public class DBManage {
      **********************************************************************/
     public void showAllTranslationsRegisters()
     {
-        //Puntu guztien kontsulta egiten du eta hauek bistaratzen ditu:
+        //get all translations and print values:
         TypedQuery<Translation> query =
                     getEntityManagerm().createQuery(ConstantValues.ALL_TRANSLATIONS, Translation.class);
         List<Translation> results = query.getResultList();
