@@ -7,6 +7,7 @@ import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -61,7 +62,7 @@ public class WriteXMLFilesFromObjectDB {
         File f = null;
         String path = "";
         boolean bool = false;
-new WriteXMLFilesFromObjectDB().Test();
+        new WriteXMLFilesFromObjectDB().Test();
         File theDir = new File("values");
 
         // if the directory does not exist, create it
@@ -114,23 +115,25 @@ new WriteXMLFilesFromObjectDB().Test();
 
             // root elements
             Document doc = docBuilder.newDocument();
-            Element rootElement = doc.createElement("company");
+            Element rootElement = doc.createElement("resources");
             doc.appendChild(rootElement);
 
             // staff elements
-            Element staff = doc.createElement("Staff");
+            Element staff = doc.createElement("string");
             rootElement.appendChild(staff);
 
+            //TODO create dinamically strings elements values to add in strings files depending select language
             // set attribute to staff element
-            Attr attr = doc.createAttribute("id");
-            attr.setValue("1");
+            Attr attr = doc.createAttribute("name");
+            attr.setValue("test");
+            staff.setTextContent("Test");
             staff.setAttributeNode(attr);
 
             // shorten way
             // staff.setAttribute("id", "1");
 
             // firstname elements
-            Element firstname = doc.createElement("firstname");
+            /*Element firstname = doc.createElement("firstname");
             firstname.appendChild(doc.createTextNode("yong"));
             staff.appendChild(firstname);
 
@@ -147,15 +150,18 @@ new WriteXMLFilesFromObjectDB().Test();
             // salary elements
             Element salary = doc.createElement("salary");
             salary.appendChild(doc.createTextNode("100000"));
-            staff.appendChild(salary);
+            staff.appendChild(salary);*/
 
             // write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource source = new DOMSource(doc);
 
             //TODO add correct path
-            StreamResult result = new StreamResult(new File("/my/file.xml"));
+
+            StreamResult result = new StreamResult(new File("values/file2.xml"));
 
             // Output to console for testing
             // StreamResult result = new StreamResult(System.out);
