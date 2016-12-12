@@ -38,7 +38,7 @@ public class Translation implements Serializable {
     }
 
     public String getText_eu() {
-        return text_eu;
+        return getText(text_eu);
     }
 
     public void setText_eu(String text_eu) {
@@ -46,7 +46,7 @@ public class Translation implements Serializable {
     }
 
     public String getText_en() {
-        return text_en;
+        return getText(text_en);
     }
 
     public void setText_en(String text_en) {
@@ -54,7 +54,7 @@ public class Translation implements Serializable {
     }
 
     public String getText_es() {
-        return text_es;
+        return getText(text_es);
     }
 
     public void setText_es(String text_es) {
@@ -62,7 +62,7 @@ public class Translation implements Serializable {
     }
 
     public String getText_ca() {
-        return text_ca;
+        return getText(text_ca);
     }
 
     public void setText_ca(String text_ca) {
@@ -70,7 +70,7 @@ public class Translation implements Serializable {
     }
 
     public String getText_ga() {
-        return text_ga;
+        return getText(text_ga);
     }
 
     public void setText_ga(String text_ga) {
@@ -78,7 +78,7 @@ public class Translation implements Serializable {
     }
 
     public String getText_pt() {
-        return text_pt;
+        return getText(text_pt);
     }
 
     public void setText_pt(String text_pt) {
@@ -86,7 +86,7 @@ public class Translation implements Serializable {
     }
 
     public String getText_it() {
-        return text_it;
+        return getText(text_it);
     }
 
     public void setText_it(String text_it) {
@@ -124,9 +124,14 @@ public class Translation implements Serializable {
         return getText_it();
     }
 
+    private String getText(String text)
+    {
+        return text.replace("'", "\\'");
+    }
+
     @Override
     public String toString()
     {
-        return this.getName() + ": " + this.getText_eu()  + " / " + this.getText_es() + " / Select Language: " + this.getSelect_language();
+        return this.getName() + ": " + this.getText_eu()  + " / " + this.getText_es() + " / " + this.getText_ca()+ " / Select Language: " + this.getSelect_language();
     }
 }
