@@ -10,6 +10,7 @@ public class ConstantValues {
     //SQL
     public static final String ALL_TRANSLATIONS = "SELECT t FROM Translation t";
     public static final String COUNT_TRANSLATIONS_REGISTERS = "SELECT COUNT(p) FROM Translation p";
+    public static final String GET_ALL_TRANSLATIONS_INFO_BY_ORDER_WITH_ID = "SELECT FROM Translation ORDER BY id";
 
     public static final String GET_INFO_IN_SELECT_LANGUAGE = "SELECT p FROM Translation p WHERE text_%s != null";
 
