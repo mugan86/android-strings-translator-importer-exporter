@@ -1,8 +1,11 @@
 package exported;
 
+import db.DBManage;
+import model.Translation;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import values.ConstantValues;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,15 +18,17 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
+/********************************************
  * Created by anartzmugika on 9/12/16.
  */
 public class WriteXMLFilesFromObjectDB {
 
     public void Test()
     {
-        ClassLoader classLoader = getClass().getClassLoader();
+        //ClassLoader classLoader = getClass().getClassLoader();
         try
         {
             String path = "src/main/res/string.xml";
@@ -62,118 +67,125 @@ public class WriteXMLFilesFromObjectDB {
         File f = null;
         String path = "";
         boolean bool = false;
-        new WriteXMLFilesFromObjectDB().Test();
-        File theDir = new File("values");
+        //new WriteXMLFilesFromObjectDB().Test();
 
-        // if the directory does not exist, create it
-        if (!theDir.exists()) {
-            System.out.println("creating directory: " + "values");
-            boolean result = false;
+        //TODO add default language code
 
-            try{
-                theDir.mkdir();
-                result = true;
-            }
-            catch(SecurityException se){
-                //handle it
-            }
-            if(result) {
-                System.out.println("DIR created");
-            }
-        }
+        String default_language = "en";
+        DBManage dbManage = new DBManage(ConstantValues.DEFAULT_DB_PATH);
 
-        try{
-            // create new files
-            f = new File("values/strings.xml");
 
-            // returns true if the file exists
-            bool = f.exists();
+        String [] languages = new String[] {"es", "ca", "eu", "pt", "it", "ga"};
 
-            // if file exists
-            if(bool)
+        for (int i = 0; i < languages.length; i++)
+        {
+            String select_lang = languages[i];
+            System.out.println(dbManage.getTranslations(select_lang).size());
+
+            List<Translation> translations = dbManage.getTranslations(select_lang);
+
+            if (translations.size() > 0)
             {
-                // get absolute path
-                path = f.getAbsolutePath();
+                File theDir = new File(String.format("values-%s", select_lang ));
 
-                // prints
-                System.out.print("Absolute Pathname "+ path);
+                // if the directory does not exist, create it
+                if (!theDir.exists()) {
+                    System.out.println("creating directory: " + "values");
+                    boolean result = false;
+
+                    try{
+                        theDir.mkdir();
+                        result = true;
+                    }
+                    catch(SecurityException se){
+                        //handle it
+                    }
+                    if(result) {
+                        System.out.println("DIR created");
+                    }
+                }
+
+                try{
+                    // create new files
+                    f = new File(String.format("values-%s", select_lang ));
+
+                    // returns true if the file exists
+                    bool = f.exists();
+
+                    // if file exists
+                    if(bool)
+                    {
+                        // get absolute path
+                        path = f.getAbsolutePath();
+
+                        // prints
+                        System.out.print("Absolute Pathname "+ path);
+                    }
+                    else
+                    {
+                        System.out.println("Not exist");
+                        f.createNewFile(); // if file already exists will do nothing
+                        FileOutputStream oFile = new FileOutputStream(f, false);
+                    }
+                }catch(Exception e){
+                    // if any error occurs
+                    e.printStackTrace();
+                }
+                try {
+
+                    DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+                    // root elements
+                    Document doc = docBuilder.newDocument();
+                    Element rootElement = doc.createElement("resources");
+                    doc.appendChild(rootElement);
+
+                    for (int item = 0; item < translations.size(); item++)
+                    {
+                        Translation translation = translations.get(item);
+                        translation.setSelect_language(select_lang);
+                        // staff elements
+                        Element staff = doc.createElement("string");
+                        rootElement.appendChild(staff);
+
+                        //TODO create dinamically strings elements values to add in strings files depending select language
+                        // set attribute to staff element
+                        Attr attr = doc.createAttribute("name");
+                        attr.setValue(translation.getName());
+                        staff.setTextContent(translation.getCurrentSelectTextTranslation());
+                        staff.setAttributeNode(attr);
+
+                    }
+
+                    // write the content into xml file
+                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                    Transformer transformer = transformerFactory.newTransformer();
+                    transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+                    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                    DOMSource source = new DOMSource(doc);
+
+                    //TODO add correct path
+                    StreamResult result = new StreamResult(new File(String.format("values-%s/strings.xml", select_lang )));
+
+                    // Output to console for testing
+                    // StreamResult result = new StreamResult(System.out);
+
+                    transformer.transform(source, result);
+
+                    System.out.println("File saved!");
+
+                } catch (ParserConfigurationException pce) {
+                    pce.printStackTrace();
+                } catch (TransformerException tfe) {
+                    tfe.printStackTrace();
+                }
             }
             else
             {
-                System.out.println("Not exist");
-                f.createNewFile(); // if file already exists will do nothing
-                FileOutputStream oFile = new FileOutputStream(f, false);
+                System.out.println("NOT VALUES!!!");
             }
-        }catch(Exception e){
-            // if any error occurs
-            e.printStackTrace();
         }
-        try {
 
-            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-
-            // root elements
-            Document doc = docBuilder.newDocument();
-            Element rootElement = doc.createElement("resources");
-            doc.appendChild(rootElement);
-
-            // staff elements
-            Element staff = doc.createElement("string");
-            rootElement.appendChild(staff);
-
-            //TODO create dinamically strings elements values to add in strings files depending select language
-            // set attribute to staff element
-            Attr attr = doc.createAttribute("name");
-            attr.setValue("test");
-            staff.setTextContent("Test");
-            staff.setAttributeNode(attr);
-
-            // shorten way
-            // staff.setAttribute("id", "1");
-
-            // firstname elements
-            /*Element firstname = doc.createElement("firstname");
-            firstname.appendChild(doc.createTextNode("yong"));
-            staff.appendChild(firstname);
-
-            // lastname elements
-            Element lastname = doc.createElement("lastname");
-            lastname.appendChild(doc.createTextNode("mook kim"));
-            staff.appendChild(lastname);
-
-            // nickname elements
-            Element nickname = doc.createElement("nickname");
-            nickname.appendChild(doc.createTextNode("mkyong"));
-            staff.appendChild(nickname);
-
-            // salary elements
-            Element salary = doc.createElement("salary");
-            salary.appendChild(doc.createTextNode("100000"));
-            staff.appendChild(salary);*/
-
-            // write the content into xml file
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            DOMSource source = new DOMSource(doc);
-
-            //TODO add correct path
-
-            StreamResult result = new StreamResult(new File("values/file2.xml"));
-
-            // Output to console for testing
-            // StreamResult result = new StreamResult(System.out);
-
-            transformer.transform(source, result);
-
-            System.out.println("File saved!");
-
-        } catch (ParserConfigurationException pce) {
-            pce.printStackTrace();
-        } catch (TransformerException tfe) {
-            tfe.printStackTrace();
-        }
     }
 }
