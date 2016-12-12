@@ -105,6 +105,28 @@ public class DBManage {
 
     }
 
+    public List<Translation> getTranslations(String select_language)
+    {
+        //get all translations and print values:
+        String query_str = String.format(ConstantValues.GET_INFO_IN_SELECT_LANGUAGE,select_language ,select_language);
+        System.out.println(query_str);
+        TypedQuery<Translation> query =
+                getEntityManagerm().createQuery(query_str, Translation.class);
+        List<Translation> results = query.getResultList();
+
+        if(results.size()>0)
+        {
+            for (Translation p : results) {
+                System.out.println(p);
+            }
+        }
+        else
+        {
+            System.out.println("Database not contain register about translations!! Do you add correctly?");
+        }
+        return results;
+    }
+
     /**
      * Datu-baseko punturik altuena bueltatzen du metodo honek. Hau da, y koordenaturik txikiena daukana.
      *
