@@ -45,7 +45,7 @@ public class ImportXMLToObjectDB {
         DBManage info_manage = new DBManage(ConstantValues.DEFAULT_DB_PATH);
         //info_manage.getRegisterCount();
         info_manage.setUselanguage(fileName);
-
+        /*
         DocumentBuilderFactory docFactory= DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder= null;
         try {
@@ -79,7 +79,7 @@ public class ImportXMLToObjectDB {
             e.printStackTrace();
         }
 
-        info_manage.addTranslationsInSelectLanguage(translations);
+        info_manage.addTranslationsInSelectLanguage(translations);*/
         info_manage.showAllTranslationsRegisters();
         info_manage.closeDataBase();
     }
