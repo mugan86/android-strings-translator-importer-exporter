@@ -46,7 +46,7 @@ public class ImportXMLToObjectDB {
         //info_manage.getRegisterCount();
         info_manage.setUselanguage(fileName);
 
-        /*DocumentBuilderFactory docFactory= DocumentBuilderFactory.newInstance();
+        DocumentBuilderFactory docFactory= DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder= null;
         try {
             docBuilder = docFactory.newDocumentBuilder();
@@ -77,9 +77,9 @@ public class ImportXMLToObjectDB {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
-        //info_manage.addTranslationsInSelectLanguage(translations);
+        info_manage.addTranslationsInSelectLanguage(translations);
         info_manage.showAllTranslationsRegisters();
         info_manage.closeDataBase();
     }
