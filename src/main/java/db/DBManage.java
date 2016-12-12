@@ -6,7 +6,6 @@ import values.ConstantValues;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /***********************************************************************************************************************
  * Created by anartzmugika on 8/12/16.
@@ -22,11 +21,6 @@ public class DBManage {
     }
     public void openDataBase(String database_path)
     {
-
-        EntityManagerFactory emf =
-                Persistence.createEntityManagerFactory("db/translations.odb");
-        EntityManager em = emf.createEntityManager();
-
         setEntityManageFactory(Persistence.createEntityManagerFactory(database_path));
 
         setEntityManagerm(getEntityManageFactory().createEntityManager());
@@ -69,7 +63,11 @@ public class DBManage {
         {
             Translation translation = translations.get(i);
             Translation find_translation_object = findTranslationObject(translation.getName());
-            if (find_translation_object == null) addTranslationObject(translation); //Object not exist, add new
+            if (find_translation_object == null)
+            {
+                System.out.println("Not exist!! Create "+ translation.toString());
+                addTranslationObject(translation); //Object not exist, add new
+            }
             else //Object exist, update data in select object
             {
                 find_translation_object.setSelect_language(translation.getSelect_language());
