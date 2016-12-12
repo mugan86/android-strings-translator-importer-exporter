@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 
@@ -10,6 +11,8 @@ import java.io.Serializable;
 @Entity
 public class Translation implements Serializable {
 
+    @GeneratedValue
+    long id;
     @Id
     private String name;
 
@@ -126,7 +129,8 @@ public class Translation implements Serializable {
 
     private String getText(String text)
     {
-        return text.replace("'", "\\'");
+        if (text != null) return text.replace("'", "\\'");
+        return "";
     }
 
     @Override
