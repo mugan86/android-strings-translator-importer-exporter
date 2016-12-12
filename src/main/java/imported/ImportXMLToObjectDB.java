@@ -1,17 +1,9 @@
 package imported;
 
-import model.Translation;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 import db.DBManage;
+import model.Translation;
 import values.ConstantValues;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,39 +40,7 @@ public class ImportXMLToObjectDB {
 
         if(add_data_in_db) //Add
         {
-            DocumentBuilderFactory docFactory= DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder= null;
-            try {
-                docBuilder = docFactory.newDocumentBuilder();
-                Document doc=docBuilder.parse(getFile(fileName));
-
-
-                NodeList strings= doc.getElementsByTagName("string");
-                System.out.println(strings.getLength());
-                System.out.println("***************************************");
-                for(int i = 0; i < strings.getLength(); i++)
-                {
-                    Node node_str_element= strings.item(i);
-                    //Erosle bakoitzaren informazioa eman ahal izateko luzeraren arabera
-                    Element str_element = (Element)node_str_element;
-                    String name = str_element.getAttribute("name");
-                    String text = str_element.getTextContent();
-                    //Elementuaren id atributua hartu eta bistaratuko du
-                    System.out.println("name: "+ name);
-                    System.out.println("Text: "+ text);
-                    System.out.println("***************************************");
-
-
-                    translations.add(new Translation(name, text, info_manage.getSelect_language()));
-                }
-            } catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            } catch (SAXException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            new Translation().readXMLFile(getFile(fileName), translations, info_manage.getSelect_language());
             info_manage.addTranslationsInSelectLanguage(translations);
         }
 
