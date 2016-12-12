@@ -23,7 +23,7 @@ Más información en el WIKI: https://github.com/mugan86/android-strings-transla
 
 Funciones implementadas hasta el momento:
 
-* Importar desde el fichero original (del idioma que partimos) a la Base de Datos en Object DB a la tabla "Translations" para editarlos dentro de dicha Base de datos usando 'epxlorer.jar' que se encuentra dentro del directorio **'readdb'**.
+* Importar desde el fichero original (del idioma que partimos) a la Base de Datos en Object DB a la tabla "Translations" para editarlos dentro de dicha Base de datos usando 'explorer.jar' que se encuentra dentro del directorio **'readdb'**.
 * Exportar las traducciones completadas (tienen que estar todos los campos rellenos) desde la tabla 'Translations' en la Base de Datos de tipo Object DB para crear diferentes ficheros en los idiomas creados.
 
 Futuras funciones que se añadirán:
