@@ -1,3 +1,5 @@
 ###Description about project
 
-The purpose is to create a table to translate texts in a simple way for more than one user without using Android Studio
+The purpose is to create a table to translate texts in a simple way for more than one user without using Android Studio.
+
+More info in WIKI: https://github.com/mugan86/android-strings-translator-importer-exporter/wiki/Introduction
