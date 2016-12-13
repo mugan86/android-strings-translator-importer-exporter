@@ -10,6 +10,6 @@ public class TestToImportXMLSQLDB {
     {
         String fileName = "en/strings.xml";
         //new ImportXMLToObjectDB().readFileResources();
-        new ImportXMLToSQL().readFileResources(fileName, true);
+        new ImportXMLToSQL().readFileResources(fileName);
     }
 }
