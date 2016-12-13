@@ -10,15 +10,11 @@ import java.util.ArrayList;
  **********************************************************************************************************************/
 public class ImportXMLToSQL {
     private ArrayList<Translation> translations;
-    public void readFileResources(String fileName, boolean add_data_in_db)
+    public void readFileResources(String fileName)
     {
-        translations = new ArrayList<Translation>();
         String select_language = "en";
-        if(add_data_in_db) //Add
-        {
-            ManageFile manageFile = new ManageFile();
-            manageFile.readXMLFile(manageFile.getFile(fileName), translations, select_language);
-        }
+        ManageFile manageFile = new ManageFile();
+        translations = manageFile.readXMLFile(manageFile.getFile(fileName), translations, select_language);
 
     }
 }
