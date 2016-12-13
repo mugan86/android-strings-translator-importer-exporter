@@ -14,6 +14,10 @@ public class ConstantValues {
 
     public static final String GET_INFO_IN_SELECT_LANGUAGE = "SELECT p FROM Translation p WHERE text_%s != null";
 
+    //SQL Import/Export constants
+    public static final String CREATE_DATABASE = "CREATE DATABASE %s;";
+    public static final String CREATE_TRANSLATION_TABLE = "CREATE TABLE Translation ( name PRIMARY KEY, text TEXT);";
+
 
     //Messages
     public static final String DELETE_ROWS_MSG = "%d registers delete!!!";
