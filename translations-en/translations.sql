@@ -1,0 +1,22 @@
+CREATE DATABASE translations_texts DEFAULT CHARACTER SET utf8   DEFAULT COLLATE utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS translations ( name VARCHAR(100) PRIMARY KEY, text_eu TEXT,  text_en TEXT, text_es TEXT, text_ca TEXT,  text_ga TEXT, text_pt TEXT, text_it TEXT);
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'app_name', '', 'Manage Images and Upload', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'action_settings', '', 'Settings', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'title_select_option_image', '', 'Select image from device or take photo', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'camera_label', '', 'Photo Camera', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'device_label', '', 'Device Images', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'send_label', '', 'Save', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'send_To_server_label', '', 'Synchronize', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'cancel_label', '', 'Cancel', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'upload_photo', '', 'Upload image', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'download_data_progress', '', 'Send data…', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'download_image_data_progress', '', 'Send image…', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'image_no_take_correctly', '', 'Not take correct image, please try again.', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'image_upload_successfully', '', 'Image upload sucess. Thank you!', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'image_upload_no_correct', '', 'Image NOT upload sucess. Please try again.', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'no_granted_access', '', 'Not available permission.', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'data_correct_send', '', 'Data send sucessfully!!', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'data_no_correct_send', '', 'Data NOT send sucessfully, please try again.', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'show_in_map_text', '', 'In Map', '', '', '', '', '');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'title_activity_main', '', 'MainActivity', '', '', '', '', '');
