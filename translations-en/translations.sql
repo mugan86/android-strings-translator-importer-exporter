@@ -1,22 +1,52 @@
-CREATE DATABASE translations_texts DEFAULT CHARACTER SET utf8   DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS translations_texts DEFAULT CHARACTER SET utf8   DEFAULT COLLATE utf8_general_ci;
+USE `translations_texts`;
 
-CREATE TABLE IF NOT EXISTS translations ( name VARCHAR(100) PRIMARY KEY, text_eu TEXT,  text_en TEXT, text_es TEXT, text_ca TEXT,  text_ga TEXT, text_pt TEXT, text_it TEXT);
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'app_name', '', 'Manage Images and Upload', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'action_settings', '', 'Settings', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'title_select_option_image', '', 'Select image from device or take photo', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'camera_label', '', 'Photo Camera', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'device_label', '', 'Device Images', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'send_label', '', 'Save', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'send_To_server_label', '', 'Synchronize', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'cancel_label', '', 'Cancel', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'upload_photo', '', 'Upload image', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'download_data_progress', '', 'Send data…', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'download_image_data_progress', '', 'Send image…', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'image_no_take_correctly', '', 'Not take correct image, please try again.', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'image_upload_successfully', '', 'Image upload sucess. Thank you!', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'image_upload_no_correct', '', 'Image NOT upload sucess. Please try again.', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'no_granted_access', '', 'Not available permission.', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'data_correct_send', '', 'Data send sucessfully!!', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'data_no_correct_send', '', 'Data NOT send sucessfully, please try again.', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'show_in_map_text', '', 'In Map', '', '', '', '', '');
-INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`)VALUES (NULL, 'title_activity_main', '', 'MainActivity', '', '', '', '', '');
+CREATE TABLE IF NOT EXISTS `translations` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `text_eu` text,
+  `text_en` text,
+  `text_es` text,
+  `text_ca` text,
+  `text_ga` text,
+  `text_pt` text,
+  `text_it` text,
+  `app_id` varchar(200) NOT NULL,
+  PRIMARY KEY (`name`,`app_id`),
+  KEY `app_id` (`app_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `app` (
+  `id` varchar(200) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `description` text NOT NULL,
+  `first_published` date NOT NULL,
+  `last_update` date NOT NULL,
+  `original_language` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `translations`
+  ADD CONSTRAINT `translations_ibfk_1` FOREIGN KEY (`app_id`) REFERENCES `app` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+INSERT IGNORE INTO `app` (`id`, `name`, `description`, `first_published`, `last_update`, `original_language`)VALUES ('com.amugika.servirace', 'Servirace', '', '2014-09-02', '2016-04-06', 'en');
+
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('1', 'app_name', '', 'Manage Images and Upload', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('2', 'action_settings', '', 'Settings', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('3', 'title_select_option_image', '', 'Select image from device or take photo', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('4', 'camera_label', '', 'Photo Camera', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('5', 'device_label', '', 'Device Images', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('6', 'send_label', '', 'Save', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('7', 'send_To_server_label', '', 'Synchronize', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('8', 'cancel_label', '', 'Cancel', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('9', 'upload_photo', '', 'Upload image', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('10', 'download_data_progress', '', 'Send data…', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('11', 'download_image_data_progress', '', 'Send image…', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('12', 'image_no_take_correctly', '', 'Not take correct image, please try again.', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('13', 'image_upload_successfully', '', 'Image upload sucess. Thank you!', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('14', 'image_upload_no_correct', '', 'Image NOT upload sucess. Please try again.', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('15', 'no_granted_access', '', 'Not available permission.', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('16', 'data_correct_send', '', 'Data send sucessfully!!', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('17', 'data_no_correct_send', '', 'Data NOT send sucessfully, please try again.', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('18', 'show_in_map_text', '', 'In Map', '', '', '', '', '', 'com.amugika.servirace');
+INSERT IGNORE INTO `translations` (`id`, `name`, `text_eu`, `text_en`, `text_es`, `text_ca`, `text_ga`, `text_pt`, `text_it`, `app_id`)VALUES ('19', 'title_activity_main', '', 'MainActivity', '', '', '', '', '', 'com.amugika.servirace');
