@@ -15,8 +15,21 @@ import java.util.ArrayList;
  **********************************************************************************************************************/
 public class ImportXMLToSQL {
     private ArrayList<Translation> translations;
+
+    //Provisional!!
+    private String app_id;
+    private String name;
+    private String description;
+    private String first_published;
+    private String last_update;
+
     public void readFileResources(String fileName)
     {
+        app_id = "com.amugika.servirace";
+        name = "Servirace";
+        description = "";
+        first_published = "2014-09-02";
+        last_update = "2016-04-06";
         translations = new ArrayList<Translation>();
         String select_language = "en";
         ManageFile manageFile = new ManageFile();
@@ -65,15 +78,28 @@ public class ImportXMLToSQL {
             bfw = new BufferedWriter(new FileWriter(String.format("translations-%s/translations.sql", select_lang ), false));
             bfw.write(String.format(ConstantValues.CREATE_DATABASE, "translations_texts"));
             bfw.newLine();
+            bfw.write(String.format("USE `%s`;", "translations_texts"));
+            bfw.newLine();
             bfw.newLine();
             bfw.write(ConstantValues.CREATE_TRANSLATION_TABLE);
+            bfw.newLine();
+            bfw.newLine();
+            bfw.write(ConstantValues.CREATE_APP_TO_TRANSLATE);
+            bfw.newLine();
+            bfw.newLine();
+            bfw.write(ConstantValues.CREATE_APP_TRANSLATION_RELATION);
+            String insert_app_info = String.format(ConstantValues.ADD_APP_INFO_IF_NOT_EXISTS, app_id, name, description, first_published, last_update, select_lang);
+            bfw.newLine();
+            bfw.newLine();
+            bfw.write(insert_app_info);
+            bfw.newLine();
             //bfw.write("{\"result\":[");
             for (int i = 0; i < translations.size (); i++)
             {
                 Translation translation = translations.get(i);
                 String insert = String.format(ConstantValues.ADD_TRANSLATION_IF_NOT_EXISTS,
-                        translation.getName(), translation.getText_eu(), translation.getText_en(),
-                        translation.getText_es(), translation.getText_ca(), translation.getText_ga(), translation.getText_pt(), translation.getText_it());
+                        (i+1), translation.getName(), translation.getText_eu(), translation.getText_en(),
+                        translation.getText_es(), translation.getText_ca(), translation.getText_ga(), translation.getText_pt(), translation.getText_it(), app_id);
 
                 bfw.newLine();
                 bfw.write(insert);
