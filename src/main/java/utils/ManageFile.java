@@ -16,7 +16,9 @@ import java.util.ArrayList;
 
 /***********************************************************************************************************************
  * Created by anartzmugika on 12/12/16.
- ********************************/
+ *
+ * Class to manage xml files and extract data to import Object DB or SQL file
+ ***********************************************************************************************************************/
 public class ManageFile {
 
     public File getFile(String fileName)
