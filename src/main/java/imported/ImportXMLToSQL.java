@@ -56,7 +56,7 @@ public class ImportXMLToSQL {
 
     private void createFile(String select_lang)
     {
-        BufferedWriter bfw = null;
+        BufferedWriter bfw;
         try
         {
             //Sartutakoa zer fitxategitan gordeko dan zehaztuko da "true" propeitatearekin
@@ -87,7 +87,7 @@ public class ImportXMLToSQL {
             bfw.close();
         }catch (IOException ioe)
         {
-            System.out.println("IOException salbuespena: "+ioe.getMessage().toString());
+            System.out.println("IOException: "+ioe.getMessage().toString());
         }
     }
 }
