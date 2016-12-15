@@ -7,7 +7,7 @@
     <string name="camera_label">Photo Camera</string>
     <string name="device_label">Device Images</string>
     <string name="send_label">Save</string>
-    <string name="send_To_server_label">Synchronize</string>
+    <string name="send_to_server_label">Synchronize</string>
     <string name="cancel_label">Cancel</string>
     <string name="upload_photo">Upload image</string>
 
