@@ -1,6 +1,7 @@
  <?php
  	#Connect to BBDD
 	include '../connect_db.php';
+	include '../active_cors.php';
 
 	error_reporting(E_ERROR);
 

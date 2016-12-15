@@ -13,4 +13,10 @@
 	{
 		return mysqli_query($con, getSelectAppTexts($current_page, $limit_per_page, $translations_texts_filt));
 	}
+
+	//Get Translate Items total to select app
+	function getSelectAppTranslateTextsRows($con, $translations_texts_filt)
+	{
+		return mysqli_num_rows(mysqli_query($con, getSelectAppTextsWithoutLimit($translations_texts_filt)));
+	}
 ?>

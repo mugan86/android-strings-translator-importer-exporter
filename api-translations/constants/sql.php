@@ -28,4 +28,13 @@
 		return "SELECT * FROM `translations` T, `app` A WHERE A.id = T.app_id AND T.app_id = '". $translations_texts_filt."' ORDER BY `T`.`id` ASC LIMIT " . $page. ",". $limit_per_page;
 	} 
 
+	/****************************************************************************************
+	$translations_texts_filt= 'id' of select app to show relational translate texts (Without LIMIT)
+	*****************************************************************************************/
+	function getSelectAppTextsWithoutLimit($translations_texts_filt)
+	{
+
+		return "SELECT * FROM `translations` T, `app` A WHERE A.id = T.app_id AND T.app_id = '". $translations_texts_filt."'";
+	} 
+
 ?>
