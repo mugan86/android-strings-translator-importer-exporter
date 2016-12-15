@@ -66,9 +66,9 @@ public class ManageFile {
                 for (int n = 0; n < items_inside_string_array.getLength(); n++)
                 {
                     Node node = items_inside_string_array.item(n);
-                    System.out.println(node.getTextContent().trim().replaceAll("\\s+",""));
+                    System.out.print(node.getTextContent().trim().replaceAll("\\s+","").replace("\n", "").replace("\r", "") + "/");
                 }
-                System.out.println(items_inside_string_array.getLength() + strings_array.item(j).getChildNodes().toString());
+
 
 
                 //translations.add(new Translation(name, text, select_language));
