@@ -41,6 +41,18 @@ public class Translation implements Serializable {
     public Translation(String name, String text, String select_language)
     {
         setName(name);
+        if (select_language.contains("_all"))
+        {
+            setText_eu(text);
+            setText_ca(text);
+            setText_es(text);
+            setText_en(text);
+            setText_ga(text);
+            setText_it(text);
+            setText_pt(text);
+            select_language = select_language.replace("_all", "");
+        }
+
         setSelect_language(select_language);
         setTextInSelectLanguage(text);
     }
