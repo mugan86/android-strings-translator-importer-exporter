@@ -47,9 +47,10 @@ public class ManageFile {
                 Node node_str_element= strings.item(i);
                 //Erosle bakoitzaren informazioa eman ahal izateko luzeraren arabera
                 Element str_element = (Element)node_str_element;
+                //get name atribute value
                 String name = str_element.getAttribute("name");
+                //Get element text content
                 String text = str_element.getTextContent();
-                //Elementuaren id atributua hartu eta bistaratuko du
                 System.out.println("name: "+ name);
                 System.out.println("Text: "+ text);
                 System.out.println("***************************************");
@@ -58,20 +59,29 @@ public class ManageFile {
                 translations.add(new Translation(name, text, select_language));
             }
 
+
+            //Check NodeList with tagname 'string-array'
             NodeList strings_array= doc.getElementsByTagName("string-array");
-            System.out.println(strings_array.getLength());
+
             for(int j = 0; j < strings_array.getLength(); j++)
             {
+                String name = (strings_array.item(j).getAttributes().getNamedItem("name")).toString().replace("\"", "").replace("name=","");
+
                 NodeList items_inside_string_array = strings_array.item(j).getChildNodes();
+
                 for (int n = 0; n < items_inside_string_array.getLength(); n++)
                 {
                     Node node = items_inside_string_array.item(n);
-                    System.out.print(node.getTextContent().trim().replaceAll("\\s+","").replace("\n", "").replace("\r", "") + "/");
+                    if (!node.getNodeName().equals("#text")) //Only use values without nodename #text. Select 'item' nodes
+                    {
+                        String element = name+"_" +node.getTextContent().trim();
+                        String name_sql = name+"_" +node.getTextContent().trim();
+                        String text = node.getTextContent();
+                        System.out.println(element);
+                        if (name_sql.contains("@string/")) translations.add(new Translation(name_sql, text, select_language+"_all"));
+                        else translations.add(new Translation(name_sql, text, select_language));
+                    }
                 }
-
-
-
-                //translations.add(new Translation(name, text, select_language));
             }
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
