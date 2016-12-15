@@ -22,5 +22,33 @@
     <string name="data_no_correct_send">Data NOT send sucessfully, please try again.</string>
     <string name="show_in_map_text"><u>In Map</u></string>
     <string name="title_activity_main">MainActivity</string>
+
+    <!-- Manage Languages -->
+
+    <string name="make_your_language_selection">Selecciona el idioma deseado</string>
+    <string name="spanish">Castellano</string>
+    <string name="catalan">Catalán</string>
+    <string name="deutchand">Alemán</string>
+    <string name="english">Inglés</string>
+    <string name="basque">Euskera</string>
+    <string name="francais">Francés</string>
+    <string name="galizian">Gallego</string>
+    <string name="italian">Italiano</string>
+
+    <string-array name="language_string">
+        <item>@string/catalan</item>
+        <item>@string/basque</item>
+        <item>@string/spanish</item>
+    </string-array>
+    <string-array name="language_codes">
+        <item>ca</item>
+        <item>eu</item>
+        <item>es</item>
+        <item>en</item>
+        <item>gl</item>
+        <item>de</item>
+        <item>fr</item>
+        <item>it</item>
+    </string-array>
 </resources>
 
