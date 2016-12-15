@@ -12,7 +12,7 @@
   <string name="image_upload_no_correct">La imatge no s\'ha pujat correctament, prova de nou si us plau.</string>
   <string name="image_upload_successfully">La imatge ha estat pujada de manera satisfactòria. Gràcies!</string>
   <string name="no_granted_access">No s\'ha donat permís</string>
-  <string name="send_To_server_label">Sincronitzar</string>
+  <string name="send_to_server_label">Sincronitzar</string>
   <string name="send_label">Desar</string>
   <string name="show_in_map_text">Mapan</string>
   <string name="title_activity_main">MainActivity</string>
