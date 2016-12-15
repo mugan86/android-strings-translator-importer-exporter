@@ -56,7 +56,8 @@ public class ManageFile {
                 System.out.println("***************************************");
 
 
-                translations.add(new Translation(name, text, select_language));
+                if (text.contains("@string/")) translations.add(new Translation(name, text, select_language+"_all"));
+                else translations.add(new Translation(name, text, select_language));
             }
 
 
