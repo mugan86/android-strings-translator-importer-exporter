@@ -50,5 +50,6 @@
         <item>fr</item>
         <item>it</item>
     </string-array>
+    <string name = "reference_to_other_string">@string/app_name</string>
 </resources>
 
