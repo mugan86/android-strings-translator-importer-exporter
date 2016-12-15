@@ -27,9 +27,9 @@
 		{
 			if (sizeof($rawdata) == 0)
 			{
-				$row_array['app_name'] = $row[11];
-				$row_array['id'] = $row [10];
-				$row_array['original_language'] = $row[15];
+				$row_array['app_name'] = $row[12];
+				$row_array['id'] = $row [11];
+				$row_array['original_language'] = $row[16];
 				$row_array['status'] = "1";
 				array_push($rawdata,$row_array);
 				unset($row_array);
